@@ -2,6 +2,8 @@
 
 This repository contains a script, **py_merge.py**, that can be used to merge two PyTorch model .bin files into a single model file. This can be useful when you need to combine the weights of two models that have the same architecture and are compatible. The script averages the parameter values of the models for keys that exist in both models.
 
+[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/R6R8K4WLS)
+
 ## Prerequisites
 Before using this script, make sure you have the following Python packages installed:
 
@@ -53,3 +55,5 @@ You can now use the merged **pytorch_model.bin** file with your model architectu
 **Note**: Merging models may not always produce the desired results, especially if the models have different architectures or were trained on different data. 
 
 Use this script only when you are sure that the models are compatible.
+
+
