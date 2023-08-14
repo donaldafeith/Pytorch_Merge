@@ -7,7 +7,7 @@ build-backend = "setuptools.build_meta"
 
 [project]  # beware if using setuptools: setup.py still gets executed, and even if pyproject.toml fields take precedence, if there is any code error in setup.py, building will fail!
 name = "pytorch_merge"
-version = "0.1.1"  # see PEP 440 https://peps.python.org/pep-0440/#pre-releases and https://packaging.python.org/en/latest/guides/single-sourcing-package-version/
+version = "0.1.2"  # see PEP 440 https://peps.python.org/pep-0440/#pre-releases and https://packaging.python.org/en/latest/guides/single-sourcing-package-version/
 description = "Merge LLM weights files that are split into multiple parts"
 authors = [
     {name = "Donalda Feith", email = "donaldafeith@gmail.com"},
@@ -48,6 +48,7 @@ classifiers = [
 dependencies = [
     "torch",
 	"transformers",
+	"tqdm",
 ]
 
 [project.urls]

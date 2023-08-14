@@ -13,47 +13,39 @@ Before using this script, make sure you have the following Python packages insta
 You can install them using pip:
 
 ```
-pip install torch
-pip install transformers
+pip install pytorch_merge
 ```
+
+This will automatically install the dependencies (`torch` and `transformers`).
 
 ## Usage
 
-Clone this repository:
+Open a terminal, and type:
 
 ```
-git clone https://github.com/donaldafeith/Pytorch_Merge.git
-cd Pytorch_Merge
-
+pytorch_merge --help
 ```
 
-Run the **py_merge.py** script:
+To get the instructions on how to use it.
 
-```
-python py_merge.py
-```
+This tool requires 3 arguments:
 
-The script will prompt you for the paths of the following files:
-* config.json: The configuration file for the model architecture you are working with.
-* model1.bin: The first model .bin file you want to merge.
-* model2.bin: The second model .bin file you want to merge.
+* `--config config.json` -- The configuration file for the model architecture you are working with.
+* `--bin model1.bin model2.bin model3.bin` -- All the model’s weights .bin files you want to merge. You can merge weights files of one multiparts model, or weights from different models, in which case weights will be averaged. You can specify as many files as you want, they will be merged one after the others in a loop.
+* `--output merged_model.bin` -- Where to save the output merged model.
 
 For example:
 
 ```
-Enter the path to the config.json file: /path/to/config.json
-Enter the path to the first model .bin file (model1.bin): /path/to/model1.bin
-Enter the path to the second model .bin file (model2.bin): /path/to/model2.bin
+pytorch_merge -c config.json -b model1.bin model2.bin -o merged_model.bin
 ```
-After providing the paths, the script will merge the models and save the result as **pytorch_model.bin** in the current directory.
 
-```
-Merged model saved as pytorch_model.bin
-```
-You can now use the merged **pytorch_model.bin** file with your model architecture.
+You can now use the merged **merged_model.bin** file with your model architecture.
 
 **Note**: Merging models may not always produce the desired results, especially if the models have different architectures or were trained on different data. 
 
 Use this script only when you are sure that the models are compatible.
 
+## License
 
+This tool was made by Donalda Feith and is licensed under GNU General Public License v3 or later (GPLv3+).
