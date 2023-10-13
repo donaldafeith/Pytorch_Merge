@@ -1,0 +1,146 @@
+# SPDX-License-Identifier: GPL-3.0-or-later
+
+[build-system]
+# never uppercap requirements unless we have evidence it won't work https://iscinumpy.dev/post/bound-version-constraints/ 
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]  # beware if using setuptools: setup.py still gets executed, and even if pyproject.toml fields take precedence, if there is any code error in setup.py, building will fail!
+name = "pytorch_merge"
+version = "0.1.2"  # see PEP 440 https://peps.python.org/pep-0440/#pre-releases and https://packaging.python.org/en/latest/guides/single-sourcing-package-version/
+description = "Merge LLM weights files that are split into multiple parts"
+authors = [
+    {name = "Donalda Feith", email = "donaldafeith@gmail.com"},
+    ]
+maintainers = [
+	{name = "Donalda Feith", email = "donaldafeith@gmail.com"},
+    {name = "Stephen Karl Larroque", email = "lrq3000@gmail.com"},
+    ]
+requires-python = ">=3.7"
+license = {text = "GNU General Public License v3 or later"} # { file = "LICENSE" }
+keywords = ["video", "gestalt", "movie", "summary", "summarization", "thumbnails"]
+classifiers = [
+    'Development Status :: 3 - Alpha',
+    'License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)',
+    'Environment :: Console',
+    'Operating System :: POSIX :: Linux',
+    'Operating System :: MacOS :: MacOS X',
+    'Operating System :: Microsoft :: Windows',
+    'Environment :: Console',
+    'Intended Audience :: Developers',
+    'Intended Audience :: End Users/Desktop',
+    'Intended Audience :: Information Technology',
+    'Intended Audience :: System Administrators',
+    'Programming Language :: Python',
+    'Programming Language :: Python :: 3',
+    'Programming Language :: Python :: 3.7',
+    'Programming Language :: Python :: 3.8',
+    'Programming Language :: Python :: 3.9',
+    'Programming Language :: Python :: 3.10',
+    'Programming Language :: Python :: 3.11',
+    'Programming Language :: Python :: 3.12',
+    'Programming Language :: Python :: Implementation :: PyPy',
+    'Topic :: Scientific/Engineering :: Artificial Intelligence',
+    'Topic :: Software Development :: Libraries',
+    'Topic :: Software Development :: Libraries :: Python Modules',
+    'Topic :: Utilities',
+]
+dependencies = [
+    "torch",
+	"transformers",
+	"tqdm",
+]
+
+[project.urls]
+Homepage = "https://github.com/donaldafeith/Pytorch_Merge"
+Documentation = "https://github.com/donaldafeith/Pytorch_Merge/blob/master/README.md"
+"Source" = "https://github.com/donaldafeith/Pytorch_Merge"
+Tracker = "https://github.com/donaldafeith/Pytorch_Merge/issues"
+Download = "https://github.com/donaldafeith/Pytorch_Merge/releases"
+#Changelog = "https://url/changelog"
+
+[project.optional-dependencies]
+test = [  # minimum dependencies to run tests
+    "pytest",
+    "pytest-cov",
+]
+testmeta = [  # dependencies to test meta-data
+    "build",
+    "twine",
+    "validate-pyproject",
+]
+
+[project.readme]
+file = "README.md"
+content-type = "text/markdown"
+
+[project.scripts]
+pytorch_merge = "pytorch_merge.pytorch_merge:main"
+
+#[tool.setuptools]
+#package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+# IMPORTANT: systematically delete `src/<project.name>.egg-info` folder before rebuilding, otherwise the list of included files will not get updated (it's in `SOURCES.txt` file in this folder)
+where = ["src"]
+include = ["pytorch_merge*"]
+#namespaces = true  # already the default
+
+[tool.setuptools.package-data]
+# Check the <mypkg>.egg-info/SOURCES.txt file generated after a `build` or `pip install` to check if the following files are correctly included in the sdist.
+# Check also the list of files included by default: https://packaging.python.org/en/latest/guides/using-manifest-in/
+"*" = [
+    "LICENSE*",
+    "README*",
+]
+
+[tool.pytest.ini_options]
+addopts = [
+    "--import-mode=importlib",
+    "-ra",
+    "--strict-markers",
+]
+xfail_strict = true
+testpaths = "tests"  # default path to look for tests if nothing is specified in commandline
+filterwarnings = [
+    "once::Warning",
+]
+required_plugins = "pytest-cov"
+
+[tool.coverage.run]
+branch = true
+relative_files = true
+include = [
+    "*/pytorch_merge.py",
+    ]
+
+[tool.coverage.paths]
+source = ["src"]
+
+[tool.coverage.report]  # Beware: you need to delete .coveragerc if you have one, otherwise .coveragerc will take precedence!
+show_missing = true
+include = [
+    "*/pytorch_merge.py",
+]
+omit = [
+    "*/python?.?/*",
+    "*/site-packages/nose/*",
+    "*/opt/python/pypy*",
+    "*/tests/*",
+]
+exclude_lines = [
+    # a more strict default pragma
+    "\\# pragma: no cover\\b",
+
+    # allow defensive code
+    "^\\s*raise AssertionError\\b",
+    "^\\s*raise NotImplementedError\\b",
+    "^\\s*return NotImplemented\\b",
+    "^\\s*raise$",
+
+    # typing-related code
+    "^if (False|TYPE_CHECKING):",
+    ": \\.\\.\\.(\\s*#.*)?$",
+    "^ +\\.\\.\\.$",
+    "-> ['\"]?NoReturn['\"]?:",
+]
