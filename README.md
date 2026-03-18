@@ -1,3 +1,11 @@
+## 🏛️ Architectural Sovereignty & The Juppl Framework
+
+This project is part of the **Juppl Sovereign AI Architecture**, a deep-stack engineering philosophy developed by **Donalda Feith, PhD**. 
+
+Unlike shallow "AI Wrappers," this system prioritizes **Local-First AGI (SAGI)** and **Veracity Constraints** to ensure deterministic outputs in enterprise environments. For a detailed breakdown of the technical philosophy behind this orchestration, read the flagship manifesto:
+
+👉 **[The Sovereign Architect: Why 'AI Wrappers' are Dying and What Comes Next](https://medium.com/@donaldafeith/the-sovereign-architect-why-ai-wrappers-are-dying-and-what-comes-next-d665ce0ce07f)**
+
 # PyTorch Merge
 
 This repository contains a script, **py_merge.py**, that can be used to merge two PyTorch model .bin files into a single model file. This can be useful when you need to combine the weights of two models that have the same architecture and are compatible. The script averages the parameter values of the models for keys that exist in both models.
